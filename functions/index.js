@@ -3,30 +3,19 @@ const { google ***REMOVED*** = require('googleapis');
 const drive = google.drive('v3');
 const { OAuth2 ***REMOVED*** = google.auth;
 
-// Set up OAuth2 credentials
+
+// Use Firebase Config instead of hardcoding
 const oAuth2Client = new OAuth2(
-  'YOUR_CLIENT_ID',       // Replace with your OAuth2 client ID
-  'YOUR_CLIENT_SECRET',   // Replace with your OAuth2 client secret
-  'YOUR_REDIRECT_URL'     // Replace with your OAuth2 redirect URL
+
+  functions.config().google.client_id,      // Client ID from config
+  functions.config().google.client_secret,  // Client Secret from config
+  'https://ucmfilm.github.io/'              // Your Redirect URL
+ e9b44e9 (recomit)
 );
 
-// Set access and refresh tokens
+// Set access and refresh tokens from Firebase Config
 oAuth2Client.setCredentials({
-  access_token: 'YOUR_ACCESS_TOKEN',       // Replace with your OAuth2 access token
-  refresh_token: 'YOUR_REFRESH_TOKEN',     // Replace with your OAuth2 refresh token
-***REMOVED***);
-
-// Cloud Function to list Google Drive files
-exports.listDriveFiles = functions.https.onRequest(async (req, res) => {
-  try {
-    const response = await drive.files.list({
-      auth: oAuth2Client,
-      pageSize: 10,  // Adjust as needed
-      fields: 'files(id, name)',
-***REMOVED***
-    res.status(200).send(response.data.files || 'No files found.');
-  ***REMOVED*** catch (error) {
-    console.error('Error listing files:', error);
-    res.status(500).send(`Error listing files: ${error.message***REMOVED***`);
-  ***REMOVED***
+  access_token: functions.config().google.access_token,
+  refresh_token: functions.config().google.refresh_token,
+ad94113 (recomit)
 ***REMOVED***);
