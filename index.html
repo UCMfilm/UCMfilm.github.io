@@ -3,12 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Management App</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Drive File List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+***REMOVED***
+        #file-list {
+            margin-top: 20px;
+***REMOVED***
+        .file-item {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+***REMOVED***
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Project Management App</h1>
-    <div id="app"></div>
-    <script src="js/app.js"></script>
+    <h1>Google Drive File List</h1>
+    <button id="fetch-files">Fetch Files</button>
+    <div id="file-list"></div>
+
+    <script>
+        document.getElementById('fetch-files').addEventListener('click', function() {
+            fetch('https://listdrivefiles-w3rbm2qs4q-uc.a.run.app/')
+            .then(response => response.json())
+            .then(data => {
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = '';
+                if (data.length === 0) {
+                    fileList.innerHTML = 'No files found';
+        ***REMOVED***
+                    data.forEach(file => {
+                        const div = document.createElement('div');
+                        div.className = 'file-item';
+                        div.textContent = `File Name: ${file.name***REMOVED***, File ID: ${file.id***REMOVED***`;
+                        fileList.appendChild(div);
+            ***REMOVED***);
+        ***REMOVED***
+    ***REMOVED***)
+            .catch(error => {
+                console.error('Error fetching files:', error);
+    ***REMOVED***);
+***REMOVED***);
+    </script>
 </body>
 </html>
