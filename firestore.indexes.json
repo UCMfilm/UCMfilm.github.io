@@ -1,0 +1,26 @@
+{
+  // Example:
+  //
+  // "indexes": [
+  //   {
+  //     "collectionGroup": "widgets",
+  //     "queryScope": "COLLECTION",
+  //     "fields": [
+  //       { "fieldPath": "foo", "arrayConfig": "CONTAINS" ***REMOVED***,
+  //       { "fieldPath": "bar", "mode": "DESCENDING" ***REMOVED***
+  //     ]
+  //   ***REMOVED***,
+  //
+  //  "fieldOverrides": [
+  //    {
+  //      "collectionGroup": "widgets",
+  //      "fieldPath": "baz",
+  //      "indexes": [
+  //        { "order": "ASCENDING", "queryScope": "COLLECTION" ***REMOVED***
+  //      ]
+  //    ***REMOVED***,
+  //   ]
+  // ]
+  "indexes": [],
+  "fieldOverrides": []
+***REMOVED***
