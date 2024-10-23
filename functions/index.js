@@ -1,43 +1,35 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall***REMOVED*** = require("firebase-functions/v2/https");
- * const {onDocumentWritten***REMOVED*** = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
-const {onRequest***REMOVED*** = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
-
-// Set up OAuth2 from Google APIs
+const functions = require("firebase-functions");
 const { google ***REMOVED*** = require("googleapis");
-const drive = google.drive("v3");
-const { OAuth2 ***REMOVED*** = google.auth;
 
-// Cloud Function to list Google Drive files
-exports.listDriveFiles = onRequest(async (req, res) => {
+const oAuth2Client = new google.auth.OAuth2(
+  functions.config().google.client_id,
+  functions.config().google.client_secret,
+  "https://your-redirect-url" // Your OAuth2 redirect URL
+);
+
+// Set credentials with access and refresh token
+oAuth2Client.setCredentials({
+  access_token: "ya29.a0AcM612z18bWecrkX9YXuzQ_a39nbH47xs1o1Nkc7zy61ryrt8E4c3mFO98yDoPcDXpB3bR1xuGaDULfT7fZjxg9st6XQfTiE6NVHMOtQ7GT4xf1ClbNiwUSIAmWWazA4CbfIEQ28655hD6MXTpcUjlruVfxeq13rpGwnnvTQaCgYKAfcSARESFQHGX2Mi-UD7S4S_5cYhCHtA1gEW5Q0175",
+  refresh_token: "1//03LbJJud-7b6CCgYIARAAGAMSNwF-L9IrMXHW-fbbIceHj2vj7LL-LYu1DW438VzBOdVCF-l_1bFyghrvvXuAMkHb-gr9KvPGa3w"
+***REMOVED***);
+
+// Refresh token if access token is expired
+oAuth2Client.on('tokens', (tokens) => {
+  if (tokens.refresh_token) {
+    // Store the new refresh token securely
+    console.log("New refresh token: ", tokens.refresh_token);
+  ***REMOVED***
+  console.log("New access token: ", tokens.access_token);
+***REMOVED***);
+
+exports.listDriveFiles = functions.https.onRequest(async (req, res) => {
   try {
-    const oAuth2Client = new OAuth2(
-      process.env.CLIENT_ID, // Reference client ID from environment variables
-      process.env.CLIENT_SECRET, // Reference client secret from environment variables
-      process.env.REDIRECT_URL // Your redirect URL
-    );
-
-    oAuth2Client.setCredentials({
-      access_token: process.env.ACCESS_TOKEN, // Using tokens from environment variables
-      refresh_token: process.env.REFRESH_TOKEN,
-      scope: "https://www.googleapis.com/auth/drive",
-      token_type: "Bearer",
-      expiry_date: process.env.EXPIRY_DATE // Optional if you're using refresh token mechanism
-***REMOVED***
-
+    const drive = google.drive({ version: "v3", auth: oAuth2Client ***REMOVED***);
     const response = await drive.files.list({
-      auth: oAuth2Client,
-      pageSize: 10,  // Adjust as needed
+      pageSize: 10,
       fields: "files(id, name)"
 ***REMOVED***
-    res.status(200).send(response.data.files || "No files found.");
+    res.status(200).json(response.data.files);
   ***REMOVED*** catch (error) {
     console.error("Error listing files: ", error);
     res.status(500).send("Error listing files.");
