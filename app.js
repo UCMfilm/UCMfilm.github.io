@@ -1,4 +1,3 @@
-// Replace with your actual Client ID
 const CLIENT_ID = '71365436814-tj6nv6feqpa75h6rgckee3lkc1kce458.apps.googleusercontent.com';
 
 let tokenClient;
@@ -8,7 +7,7 @@ let signoutButton = document.getElementById('signout_button');
 let fileInput = document.getElementById('file_input');
 let uploadButton = document.getElementById('upload_button');
 
-// Initialize the token client with your Client ID
+// Initialize the Google Identity Services client
 function initializeGSI() {
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
@@ -17,8 +16,7 @@ function initializeGSI() {
             if (tokenResponse.access_token) {
                 accessToken = tokenResponse.access_token;
                 console.log('Access token received.');
-                // Now you can enable file upload or other functionality
-                uploadButton.disabled = false;
+                uploadButton.disabled = false;  // Enable upload button once authenticated
     ***REMOVED***
 ***REMOVED***,
 ***REMOVED***
@@ -43,24 +41,32 @@ function handleUploadClick() {
         return;
     ***REMOVED***
 
+    // Simplified metadata for debugging
     const metadata = {
-        name: file.name,
-        mimeType: file.type
+        name: file.name  // Only provide the file name for now
     ***REMOVED***;
 
     const form = new FormData();
     form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' ***REMOVED***));
     form.append('file', file);
 
+    // Ensure the access token is included in the request headers
     fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
         method: 'POST',
-        headers: new Headers({ 'Authorization': 'Bearer ' + accessToken ***REMOVED***),
+        headers: new Headers({
+            'Authorization': 'Bearer ' + accessToken  // Include the access token
+***REMOVED***),
         body: form
-    ***REMOVED***).then((response) => response.json())
-      .then((data) => {
-          console.log('File uploaded successfully', data);
-      ***REMOVED***)
-      .catch((error) => console.error('Error uploading file:', error));
+    ***REMOVED***).then((response) => {
+        if (!response.ok) {
+            return response.json().then(errorInfo => Promise.reject(errorInfo));
+***REMOVED***
+        return response.json();
+    ***REMOVED***).then((data) => {
+        console.log('File uploaded successfully', data);
+    ***REMOVED***).catch((error) => {
+        console.error('Error uploading file:', error);
+***REMOVED***
 ***REMOVED***
 
 // Initialize the GSI client when the page loads
