@@ -5,38 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Drive Sync</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Load the Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth-compat.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- Load the new Google Identity Services library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Sync Files to Google Drive</h1>
-        <button id="authorize_button" style="display: block;">Authorize Google Drive</button>
-        <button id="signout_button" style="display: block;">Sign Out</button>
+        <button id="authorize_button">Authorize Google Drive</button>
+        <button id="signout_button" style="display: none;">Sign Out</button>
         <input type="file" id="file_input" />
-        <button id="upload_button">Upload to Drive</button>
+        <button id="upload_button" disabled>Upload to Drive</button>
     </div>
 
-    <!-- Initialize Firebase and app.js -->
-    <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
-            authDomain: "ucmfilm-c6bfe.firebaseapp.com",
-            projectId: "ucmfilm-c6bfe",
-            storageBucket: "ucmfilm-c6bfe.appspot.com",
-            messagingSenderId: "71365436814",
-            appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df",
-            measurementId: "G-Y09FC4BWGD"
-***REMOVED***;
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
+    <!-- Load the app.js script -->
     <script src="app.js"></script>
 </body>
 </html>

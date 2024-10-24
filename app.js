@@ -1,57 +1,41 @@
+// Replace with your actual Client ID
 const CLIENT_ID = '71365436814-tj6nv6feqpa75h6rgckee3lkc1kce458.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA';
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
+let tokenClient;
+let accessToken = null;
 let authorizeButton = document.getElementById('authorize_button');
 let signoutButton = document.getElementById('signout_button');
-let uploadButton = document.getElementById('upload_button');
 let fileInput = document.getElementById('file_input');
+let uploadButton = document.getElementById('upload_button');
 
-// Load the Google API client
-function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
-***REMOVED***
-
-function initClient() {
-    gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES
-    ***REMOVED***).then(function () {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-        authorizeButton.onclick = handleAuthClick;
-        signoutButton.onclick = handleSignoutClick;
-        uploadButton.onclick = handleUploadClick;
-    ***REMOVED***, function (error) {
-        // Log the full error object for debugging
-        console.error('Error initializing Google API client', error);
-***REMOVED***
-***REMOVED***
-
-function updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        uploadButton.style.display = 'block';
-    ***REMOVED*** else {
-        authorizeButton.style.display = 'block';
-        signoutButton.style.display = 'none';
-        uploadButton.style.display = 'none';
+// Initialize the token client with your Client ID
+function initializeGSI() {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: 'https://www.googleapis.com/auth/drive.file',
+        callback: (tokenResponse) => {
+            if (tokenResponse.access_token) {
+                accessToken = tokenResponse.access_token;
+                console.log('Access token received.');
+                // Now you can enable file upload or other functionality
+                uploadButton.disabled = false;
     ***REMOVED***
+***REMOVED***,
+***REMOVED***
 ***REMOVED***
 
+// Trigger the authorization flow when the user clicks the Authorize button
 function handleAuthClick() {
-    gapi.auth2.getAuthInstance().signIn();
+    tokenClient.requestAccessToken();
 ***REMOVED***
 
+// Sign out function (invalidate token)
 function handleSignoutClick() {
-    gapi.auth2.getAuthInstance().signOut();
+    accessToken = null;
+    console.log('Signed out.');
 ***REMOVED***
 
+// Upload the selected file to Google Drive
 function handleUploadClick() {
     const file = fileInput.files[0];
     if (!file) {
@@ -64,7 +48,6 @@ function handleUploadClick() {
         mimeType: file.type
     ***REMOVED***;
 
-    const accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
     const form = new FormData();
     form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' ***REMOVED***));
     form.append('file', file);
@@ -80,5 +63,8 @@ function handleUploadClick() {
       .catch((error) => console.error('Error uploading file:', error));
 ***REMOVED***
 
-// Call handleClientLoad to start the process when the page loads
-handleClientLoad();
+// Initialize the GSI client when the page loads
+window.onload = initializeGSI;
+authorizeButton.onclick = handleAuthClick;
+signoutButton.onclick = handleSignoutClick;
+uploadButton.onclick = handleUploadClick;
