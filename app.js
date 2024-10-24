@@ -32,12 +32,23 @@ function handleGoogleAuthClick() {
 document.getElementById('list_files_button').addEventListener('click', listFiles);
 
 function listFiles() {
-    const url = `https://us-central1-ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles?accessToken=${googleAccessToken***REMOVED***`;  // Replace with correct region if necessary
+    const url = `https://us-central1-ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles?accessToken=${googleAccessToken***REMOVED***`;
+  
+    if (!googleAccessToken) {
+      alert("Please authorize access to Google Drive first.");
+      return;
+    ***REMOVED***
   
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject(`Failed to fetch. Status: ${response.status***REMOVED***`);
+***REMOVED***
+        return response.json();
+      ***REMOVED***)
       .then(data => {
-        displayGoogleFiles(data);
+        console.log("Files from Google Drive:", data);
+        displayGoogleFiles(data);  // Assuming you have a function to display files
       ***REMOVED***)
       .catch(error => {
         console.error('Error fetching files:', error);
