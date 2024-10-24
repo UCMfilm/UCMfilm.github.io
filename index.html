@@ -1,39 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive Sync</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
-  <button id="login">Login with Google</button>
+    <div class="container">
+        <h1>Sync Files to Google Drive</h1>
+        <button id="authorize_button" style="display: none;">Authorize Google Drive</button>
+        <button id="signout_button" style="display: none;">Sign Out</button>
+        <input type="file" id="file_input" />
+        <button id="upload_button">Upload to Drive</button>
+    </div>
 
-  <script>
-    // Your Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
-      authDomain: "Yucmfilm-c6bfe.firebaseapp.com",
-      projectId: "ucmfilm-c6bfe",
-      storageBucket: "ucmfilm-c6bfe.appspot.com",
-      messagingSenderId: "71365436814	",
-      appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df"
-    ***REMOVED***;
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Google Authentication
-    var provider = new firebase.auth.GoogleAuthProvider();
-
-    document.getElementById('login').addEventListener('click', function() {
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token.
-        var token = result.credential.accessToken;
-        console.log(token); 
-
-        // Use this token to access Google APIs like Drive.
-      ***REMOVED***).catch(function(error) {
-        console.error("Error authenticating: ", error);
-  ***REMOVED***
-***REMOVED***
-  </script>
+    <script src="app.js"></script>
 </body>
 </html>

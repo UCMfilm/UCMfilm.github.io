@@ -1,11 +1,4 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp ***REMOVED*** from "firebase/app";
-import { getAnalytics ***REMOVED*** from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
   authDomain: "ucmfilm-c6bfe.firebaseapp.com",
@@ -17,5 +10,18 @@ const firebaseConfig = {
 ***REMOVED***;
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Store file metadata in Firebase
+function storeFileMetadata(fileName, fileId) {
+  db.collection('files').add({
+      name: fileName,
+      fileId: fileId,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  ***REMOVED***).then((docRef) => {
+      console.log("Metadata stored with ID:", docRef.id);
+  ***REMOVED***).catch((error) => {
+      console.error("Error adding document:", error);
+  ***REMOVED***);
+***REMOVED***

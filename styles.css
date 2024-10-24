@@ -1,14 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url('filmtechbgimg.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 ***REMOVED***
 
-h1 {
-    color: #333;
+.container {
+    padding: 50px;
+***REMOVED***
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #4285f4;
+    color: white;
+    cursor: pointer;
+***REMOVED***
+
+button:hover {
+    background-color: #357ae8;
+***REMOVED***
+
+input[type="file"] {
+    margin: 20px;
+    padding: 10px;
 ***REMOVED***
