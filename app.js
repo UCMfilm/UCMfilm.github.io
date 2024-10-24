@@ -32,16 +32,19 @@ function handleGoogleAuthClick() {
 document.getElementById('list_files_button').addEventListener('click', listFiles);
 
 function listFiles() {
-    fetch('https://ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles')  // Replace with your actual Firebase Cloud Function URL
-        .then(response => response.json())
-        .then(data => {
-            displayGoogleFiles(data);
-        })
-        .catch(error => {
-            console.error('Error fetching files:', error);
-            alert('Failed to list files from Google Drive.');
-        });
-}
+    const url = `https://us-central1-ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles?accessToken=${googleAccessToken}`;  // Replace with correct region if necessary
+  
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        displayGoogleFiles(data);
+      })
+      .catch(error => {
+        console.error('Error fetching files:', error);
+        alert('Failed to list files from Google Drive.');
+      });
+  }
+  
 
 function displayGoogleFiles(files) {
     const fileListDiv = document.getElementById('file_list');
