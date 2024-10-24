@@ -1,4 +1,4 @@
-const CLIENT_ID = '283831320289-9o8udsvogido7umljk17qhka2v22k9rq.apps.googleusercontent.com';
+const CLIENT_ID = '71365436814-tj6nv6feqpa75h6rgckee3lkc1kce458.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA';
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 const SCOPES = 'https://www.googleapis.com/auth/drive.file';
