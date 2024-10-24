@@ -1,51 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drive File List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-***REMOVED***
-        #file-list {
-            margin-top: 20px;
-***REMOVED***
-        .file-item {
-            margin: 5px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-***REMOVED***
-    </style>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 </head>
 <body>
-    <h1>Google Drive File List</h1>
-    <button id="fetch-files">Fetch Files</button>
-    <div id="file-list"></div>
+  <button id="login">Login with Google</button>
 
-    <script>
-        document.getElementById('fetch-files').addEventListener('click', function() {
-            fetch('https://listdrivefiles-w3rbm2qs4q-uc.a.run.app/')
-            .then(response => response.json())
-            .then(data => {
-                const fileList = document.getElementById('file-list');
-                fileList.innerHTML = '';
-                if (data.length === 0) {
-                    fileList.innerHTML = 'No files found';
-        ***REMOVED***
-                    data.forEach(file => {
-                        const div = document.createElement('div');
-                        div.className = 'file-item';
-                        div.textContent = `File Name: ${file.name***REMOVED***, File ID: ${file.id***REMOVED***`;
-                        fileList.appendChild(div);
-            ***REMOVED***);
-        ***REMOVED***
-    ***REMOVED***)
-            .catch(error => {
-                console.error('Error fetching files:', error);
-    ***REMOVED***);
-***REMOVED***);
-    </script>
+  <script>
+    // Your Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
+      authDomain: "Yucmfilm-c6bfe.firebaseapp.com",
+      projectId: "ucmfilm-c6bfe",
+      storageBucket: "ucmfilm-c6bfe.appspot.com",
+      messagingSenderId: "71365436814	",
+      appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df"
+    ***REMOVED***;
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Google Authentication
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    document.getElementById('login').addEventListener('click', function() {
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token.
+        var token = result.credential.accessToken;
+        console.log(token);
+
+        // Use this token to access Google APIs like Drive.
+      ***REMOVED***).catch(function(error) {
+        console.error("Error authenticating: ", error);
+  ***REMOVED***
+***REMOVED***
+  </script>
 </body>
 </html>
