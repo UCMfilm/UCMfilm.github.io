@@ -27,22 +27,21 @@ function initClient() {
         signoutButton.onclick = handleSignoutClick;
         uploadButton.onclick = handleUploadClick;
     }, function (error) {
+        // Log the full error object for debugging
         console.error('Error initializing Google API client', error);
     });
 }
 
 function updateSigninStatus(isSignedIn) {
-  if (isSignedIn) {
-      // Hide the authorize button, show the signout button
-      document.getElementById('authorize_button').style.display = 'none';
-      document.getElementById('signout_button').style.display = 'block';
-      document.getElementById('upload_button').style.display = 'block';
-  } else {
-      // Show the authorize button if not signed in
-      document.getElementById('authorize_button').style.display = 'block';
-      document.getElementById('signout_button').style.display = 'none';
-      document.getElementById('upload_button').style.display = 'none';
-  }
+    if (isSignedIn) {
+        authorizeButton.style.display = 'none';
+        signoutButton.style.display = 'block';
+        uploadButton.style.display = 'block';
+    } else {
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+        uploadButton.style.display = 'none';
+    }
 }
 
 function handleAuthClick() {
@@ -81,4 +80,5 @@ function handleUploadClick() {
       .catch((error) => console.error('Error uploading file:', error));
 }
 
+// Call handleClientLoad to start the process when the page loads
 handleClientLoad();
