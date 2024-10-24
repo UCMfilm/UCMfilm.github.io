@@ -1,8 +1,8 @@
 const functions = require("firebase-functions");
 const { google ***REMOVED*** = require("googleapis");
-const cors = require("cors")({ origin: true ***REMOVED***);  // Add CORS middleware
+const cors = require("cors")({ origin: true ***REMOVED***);  // CORS middleware
 
-// Initialize OAuth2 client with the Firebase environment variables
+// Initialize OAuth2 client with Firebase environment variables
 const oAuth2Client = new google.auth.OAuth2(
   functions.config().google.client_id,
   functions.config().google.client_secret,
@@ -19,8 +19,10 @@ exports.listDriveFiles = functions.https.onRequest((req, res) => {
         return res.status(400).send("Access token is required.");
       ***REMOVED***
 
+      // Set the OAuth2 client credentials
       oAuth2Client.setCredentials({ access_token: accessToken ***REMOVED***);
 
+      // Use Google Drive API to list files
       const drive = google.drive({ version: "v3", auth: oAuth2Client ***REMOVED***);
 
       const response = await drive.files.list({
@@ -30,7 +32,7 @@ exports.listDriveFiles = functions.https.onRequest((req, res) => {
 
       res.status(200).send(response.data.files || "No files found.");
     ***REMOVED*** catch (error) {
-      console.error("Error listing files: ", error);
+      console.error("Error listing files:", error);
       res.status(500).send("Error listing files.");
     ***REMOVED***
   ***REMOVED***);
