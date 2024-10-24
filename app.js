@@ -91,6 +91,14 @@ function handleMicrosoftLogin() {
 ***REMOVED***);
 ***REMOVED***
 
+// Microsoft logout
+
+function handleMicrosoftLogout() {
+    msalInstance.logoutPopup({
+        postLogoutRedirectUri: 'https://ucmfilm.github.io/'  // Redirect back to homepage after logout
+***REMOVED***
+***REMOVED***
+
 // Upload file to OneDrive
 function handleMicrosoftUploadClick() {
     const file = microsoftFileInput.files[0];
