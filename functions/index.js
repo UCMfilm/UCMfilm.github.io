@@ -1,40 +1,33 @@
 const functions = require("firebase-functions");
 const { google } = require("googleapis");
-const cors = require("cors")({ origin: true });  // Add CORS support
+const cors = require("cors")({ origin: true });  // Add CORS middleware
 
 // Initialize OAuth2 client with the Firebase environment variables
 const oAuth2Client = new google.auth.OAuth2(
   functions.config().google.client_id,
   functions.config().google.client_secret,
-  "https://ucmfilm-c6bfe.firebaseapp.com/__/auth/handler"  // Replace with your actual redirect URI from Firebase
+  "https://ucmfilm-c6bfe.firebaseapp.com/__/auth/handler"
 );
 
 // Cloud Function to list Google Drive files
 exports.listDriveFiles = functions.https.onRequest((req, res) => {
   cors(req, res, async () => {
     try {
-      // Check if the access token is provided in the request (passed from the frontend)
       const { accessToken } = req.query;
 
       if (!accessToken) {
         return res.status(400).send("Access token is required.");
       }
 
-      // Set the access token for the OAuth2 client
-      oAuth2Client.setCredentials({
-        access_token: accessToken,
-      });
+      oAuth2Client.setCredentials({ access_token: accessToken });
 
-      // Create the Google Drive instance
       const drive = google.drive({ version: "v3", auth: oAuth2Client });
 
-      // List the files from Google Drive
       const response = await drive.files.list({
-        pageSize: 10,  // Number of files to list
-        fields: "nextPageToken, files(id, name)",  // Retrieve file IDs and names
+        pageSize: 10,
+        fields: "nextPageToken, files(id, name)",
       });
 
-      // Send the list of files in the response
       res.status(200).send(response.data.files || "No files found.");
     } catch (error) {
       console.error("Error listing files: ", error);
