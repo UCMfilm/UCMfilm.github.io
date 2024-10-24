@@ -32,15 +32,17 @@ function initClient() {
 ***REMOVED***
 
 function updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        uploadButton.style.display = 'block';
-    ***REMOVED*** else {
-        authorizeButton.style.display = 'block';
-        signoutButton.style.display = 'none';
-        uploadButton.style.display = 'none';
-    ***REMOVED***
+  if (isSignedIn) {
+      // Hide the authorize button, show the signout button
+      document.getElementById('authorize_button').style.display = 'none';
+      document.getElementById('signout_button').style.display = 'block';
+      document.getElementById('upload_button').style.display = 'block';
+  ***REMOVED*** else {
+      // Show the authorize button if not signed in
+      document.getElementById('authorize_button').style.display = 'block';
+      document.getElementById('signout_button').style.display = 'none';
+      document.getElementById('upload_button').style.display = 'none';
+  ***REMOVED***
 ***REMOVED***
 
 function handleAuthClick() {
