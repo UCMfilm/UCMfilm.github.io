@@ -32,7 +32,7 @@ function handleGoogleAuthClick() {
 document.getElementById('list_files_button').addEventListener('click', listFiles);
 
 function listFiles() {
-    fetch('https://your-project-id.cloudfunctions.net/listDriveFiles')  // Replace with your actual Firebase Cloud Function URL
+    fetch('https://ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles')  // Replace with your actual Firebase Cloud Function URL
         .then(response => response.json())
         .then(data => {
             displayGoogleFiles(data);
