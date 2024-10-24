@@ -28,6 +28,39 @@ function handleGoogleAuthClick() {
     googleTokenClient.requestAccessToken();
 ***REMOVED***
 
+// Google Drive file list
+document.getElementById('list_files_button').addEventListener('click', listFiles);
+
+function listFiles() {
+    fetch('https://your-project-id.cloudfunctions.net/listDriveFiles')  // Replace with your actual Firebase Cloud Function URL
+        .then(response => response.json())
+        .then(data => {
+            displayGoogleFiles(data);
+***REMOVED***)
+        .catch(error => {
+            console.error('Error fetching files:', error);
+            alert('Failed to list files from Google Drive.');
+***REMOVED***);
+***REMOVED***
+
+function displayGoogleFiles(files) {
+    const fileListDiv = document.getElementById('file_list');
+    fileListDiv.innerHTML = '';  // Clear previous list
+
+    if (files.length === 0) {
+        fileListDiv.innerHTML = 'No files found.';
+        return;
+    ***REMOVED***
+
+    const ul = document.createElement('ul');
+    files.forEach(file => {
+        const li = document.createElement('li');
+        li.textContent = `${file.name***REMOVED*** (ID: ${file.id***REMOVED***)`;
+        ul.appendChild(li);
+***REMOVED***
+    fileListDiv.appendChild(ul);
+***REMOVED***
+
 // Google Drive file upload
 function handleGoogleUploadClick() {
     const file = googleFileInput.files[0];
@@ -51,14 +84,23 @@ function handleGoogleUploadClick() {
 ***REMOVED***
         return response.json();
     ***REMOVED***).then((data) => {
-        console.log('File uploaded to Google Drive successfully', data);
+        console.log('File uploaded to Google Drive successfully:', data);
     ***REMOVED***).catch((error) => {
         console.error('Error uploading to Google Drive:', error);
+        alert('Failed to upload file to Google Drive.');
 ***REMOVED***
 ***REMOVED***
+
+// Google signout
+googleSignoutButton.onclick = function() {
+    google.accounts.oauth2.revoke(googleAccessToken, () => {
+        console.log('User signed out from Google.');
+        googleAccessToken = null;
+        googleUploadButton.disabled = true;
+***REMOVED***
+***REMOVED***;
 
 // ------------------------ Microsoft OneDrive Setup ------------------------
-
 
 const msalConfig = {
     auth: {
@@ -89,15 +131,48 @@ function handleMicrosoftLogin() {
 ***REMOVED***)
         .catch(error => {
             console.error("Error during Microsoft login", error);
+            alert('Failed to login to Microsoft OneDrive.');
 ***REMOVED***);
 ***REMOVED***
 
-// Microsoft logout
+// Microsoft OneDrive file list
+document.getElementById('list_files_button_microsoft').addEventListener('click', listMicrosoftFiles);
 
-function handleMicrosoftLogout() {
-    msalInstance.logoutPopup({
-        postLogoutRedirectUri: 'https://ucmfilm.github.io/'  // Redirect back to homepage after logout
+function listMicrosoftFiles() {
+    fetch('https://graph.microsoft.com/v1.0/me/drive/root/children', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + microsoftAccessToken
 ***REMOVED***
+    ***REMOVED***).then(response => {
+        if (!response.ok) {
+            return response.json().then(errorInfo => Promise.reject(errorInfo));
+***REMOVED***
+        return response.json();
+    ***REMOVED***).then(data => {
+        displayMicrosoftFiles(data.value);  // data.value contains the array of files
+    ***REMOVED***).catch(error => {
+        console.error('Error fetching Microsoft OneDrive files:', error);
+        alert('Failed to list files from Microsoft OneDrive.');
+***REMOVED***
+***REMOVED***
+
+function displayMicrosoftFiles(files) {
+    const fileListDiv = document.getElementById('file_list_microsoft');
+    fileListDiv.innerHTML = '';  // Clear previous list
+
+    if (files.length === 0) {
+        fileListDiv.innerHTML = 'No files found in OneDrive.';
+        return;
+    ***REMOVED***
+
+    const ul = document.createElement('ul');
+    files.forEach(file => {
+        const li = document.createElement('li');
+        li.textContent = `${file.name***REMOVED*** (ID: ${file.id***REMOVED***)`;
+        ul.appendChild(li);
+***REMOVED***
+    fileListDiv.appendChild(ul);
 ***REMOVED***
 
 // Upload file to OneDrive
@@ -126,6 +201,14 @@ function handleMicrosoftUploadClick() {
         console.log('File uploaded to OneDrive successfully:', data);
     ***REMOVED***).catch((error) => {
         console.error('Error uploading to OneDrive:', error);
+        alert('Failed to upload file to OneDrive.');
+***REMOVED***
+***REMOVED***
+
+// Microsoft logout
+function handleMicrosoftLogout() {
+    msalInstance.logoutPopup({
+        postLogoutRedirectUri: 'https://ucmfilm.github.io/'  // Redirect back to homepage after logout
 ***REMOVED***
 ***REMOVED***
 
@@ -138,13 +221,9 @@ window.onload = function() {
 
 // Google event listeners
 googleAuthorizeButton.onclick = handleGoogleAuthClick;
-googleSignoutButton.onclick = function() {
-    googleAccessToken = null;
-    googleUploadButton.disabled = true;
-    console.log('Signed out from Google.');
-***REMOVED***;
 googleUploadButton.onclick = handleGoogleUploadClick;
 
 // Microsoft event listeners
 microsoftLoginButton.onclick = handleMicrosoftLogin;
 microsoftUploadButton.onclick = handleMicrosoftUploadClick;
+document.getElementById('microsoft_logout_button').onclick = handleMicrosoftLogout;
