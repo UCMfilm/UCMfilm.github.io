@@ -61,8 +61,8 @@ function handleGoogleUploadClick() {
 
 const msalConfig = {
     auth: {
-        clientId: 'YOUR_MICROSOFT_CLIENT_ID',  // Replace with your Microsoft Client ID
-        authority: 'https://login.microsoftonline.com/YOUR_TENANT_ID',  // Replace with your Tenant ID
+        clientId: '623e2399-7ec0-44fb-87b7-776e7c84e442',  // Replace with your Microsoft Client ID
+        authority: 'https://login.microsoftonline.com/edcb846b-282a-41d3-9672-a2de8956a0f1',  // Replace with your Tenant ID
         redirectUri: 'https://ucmfilm.github.io/'  // Your redirect URI (GitHub Pages URL)
     ***REMOVED***
 ***REMOVED***;
