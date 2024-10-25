@@ -234,7 +234,7 @@ window.onload = function () {
 ***REMOVED***;
 
 document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.pathname.includes("listDriveFiles.html")) {
+    if (window.location.pathname.includes("page1.html")) {
         document.getElementById('google_authorize_button').onclick = handleGoogleAuthClick;
         document.getElementById('list_files_button').onclick = listFiles;
     ***REMOVED***
