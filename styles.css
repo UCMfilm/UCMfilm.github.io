@@ -27,3 +27,31 @@ input[type="file"] {
     margin: 20px;
     padding: 10px;
 ***REMOVED***
+/* Basic styles for the navigation menu */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+  ***REMOVED***
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  ***REMOVED***
+  
+  nav ul li {
+    display: inline;
+    margin-right: 15px;
+  ***REMOVED***
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  ***REMOVED***
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  ***REMOVED***
+  
