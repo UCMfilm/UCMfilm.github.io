@@ -33,29 +33,29 @@ document.getElementById('list_files_button').addEventListener('click', listFiles
 
 function listFiles() {
     const url = `https://us-central1-ucmfilm-c6bfe.cloudfunctions.net/listDriveFiles?accessToken=${googleAccessToken***REMOVED***`;
-  
+
     if (!googleAccessToken) {
-      alert("Please authorize access to Google Drive first.");
-      return;
+        alert("Please authorize access to Google Drive first.");
+        return;
     ***REMOVED***
-  
+
     fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          return Promise.reject(`Failed to fetch. Status: ${response.status***REMOVED***`);
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject(`Failed to fetch. Status: ${response.status***REMOVED***`);
+    ***REMOVED***
+            return response.json();
+***REMOVED***)
+        .then(data => {
+            console.log("Files from Google Drive:", data);
+            displayGoogleFiles(data);  // Assuming you have a function to display files
+***REMOVED***)
+        .catch(error => {
+            console.error('Error fetching files:', error);
+            alert('Failed to list files from Google Drive.');
+***REMOVED***);
 ***REMOVED***
-        return response.json();
-      ***REMOVED***)
-      .then(data => {
-        console.log("Files from Google Drive:", data);
-        displayGoogleFiles(data);  // Assuming you have a function to display files
-      ***REMOVED***)
-      .catch(error => {
-        console.error('Error fetching files:', error);
-        alert('Failed to list files from Google Drive.');
-  ***REMOVED***
-  ***REMOVED***
-  
+
 
 function displayGoogleFiles(files) {
     const fileListDiv = document.getElementById('file_list');
@@ -106,7 +106,7 @@ function handleGoogleUploadClick() {
 ***REMOVED***
 
 // Google signout
-googleSignoutButton.onclick = function() {
+googleSignoutButton.onclick = function () {
     google.accounts.oauth2.revoke(googleAccessToken, () => {
         console.log('User signed out from Google.');
         googleAccessToken = null;
@@ -228,10 +228,17 @@ function handleMicrosoftLogout() {
 
 // ------------------------ Event Listeners ------------------------
 
-window.onload = function() {
+window.onload = function () {
     // Initialize Google GSI on page load
     initializeGoogleGSI();
 ***REMOVED***;
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.pathname.includes("listDriveFiles.html")) {
+        document.getElementById('google_authorize_button').onclick = handleGoogleAuthClick;
+        document.getElementById('list_files_button').onclick = listFiles;
+    ***REMOVED***
+***REMOVED***);
 
 // Google event listeners
 googleAuthorizeButton.onclick = handleGoogleAuthClick;
