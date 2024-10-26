@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets Contacts</title>
-    <!-- Load Google API client -->
-    <script src="https://apis.google.com/js/api.js" defer></script>
-    <!-- Load Google Identity Services (GIS) client library -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- Load app.js as a module -->
-    <script src="app.js" type="module"></script>
+    <title>Contacts - Contact Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
-    <h1>Google Sheets Contacts 2</h1>
-    <button id="signin-button" onclick="handleAuthClick()">Sign In</button>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+        </ul>
+    </nav>
+    
+    <div class="auth-section">
+        <button onclick="handleAuthClick()" id="signInButton">Sign In with Google</button>
+    </div>
+
     <div id="contactData"></div>
 </body>
 </html>
