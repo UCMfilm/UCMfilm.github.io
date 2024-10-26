@@ -7,7 +7,10 @@ const firebaseConfig = {
     messagingSenderId: "71365436814",
     appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df"
 ***REMOVED***;
+
+// Initialize Firebase and Firestore
 firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore(); // Ensure this is defined at the start
 
 // Google Sign-In setup
 document.getElementById("googleLoginButton").addEventListener("click", function() {
@@ -56,6 +59,8 @@ function displayProfile(user, provider) {
     document.getElementById("userName").textContent = user.name || user.displayName;
     document.getElementById("provider").textContent = provider;
 ***REMOVED***
+
+// Function to fetch and display project data from Firestore
 ***REMOVED***
     const projectRef = db.collection("projects").where("name", "==", projectName);
 
@@ -66,8 +71,15 @@ function displayProfile(user, provider) {
             document.getElementById("projectDescription").textContent = projectData.description;
             document.getElementById("projectStatus").textContent = `Status: ${projectData.status***REMOVED***`;
 ***REMOVED***
+***REMOVED*** // Hide list when displaying details
 ***REMOVED***);
     ***REMOVED***).catch((error) => {
         console.log("Error getting project data:", error);
+***REMOVED***
+***REMOVED***
+
+// Function to return to project list view
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
