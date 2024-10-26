@@ -1,6 +1,6 @@
 // Function to fetch data from Google Sheets API
 async function fetchData() {
-    const url = 'https://script.google.com/macros/s/AKfycbxlxQ_7KsgkhbBJqD5YOAYtuNlGfmDUsh-VnQCId0bz7Sds3DpAI-M_QsmMN_MXN1aB/exec';
+    const url = 'https://script.google.com/macros/s/AKfycbyCsKkwHje-1JowDoAmcupz4KaDilXv_3W411YBnp3ZoazGFD3GG7c8DpxB81oKKPi4/exec';
     try {
         const response = await fetch(url);  // No 'no-cors' mode here for full access
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
