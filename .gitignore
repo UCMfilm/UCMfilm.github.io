@@ -70,3 +70,7 @@ node_modules/
 
 # Ignore environment variables
 .env
+
+
+# Ignore BFG Repo-Cleaner replacement file
+.bfg-replace
