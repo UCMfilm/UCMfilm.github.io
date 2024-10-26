@@ -3,36 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project List</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Firebase SDKs (using non-ESM CDN links for compatibility) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <title>Firebase Test</title>
 </head>
 <body>
-    <!-- Navigation Menu -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-        </ul>
-    </nav>
+    <h1>Firebase Firestore Data</h1>
+    
+    <!-- Placeholder for Firestore data -->
+    <div id="output">Loading...</div>
 
-    <!-- Project List Section -->
-    <div id="projectList">
-        <button onclick="showProjectData('Project A')">Project A</button>
-        <button onclick="showProjectData('Project B')">Project B</button>
-    </div>
-
-    <!-- Project Details Section -->
-    <div id="projectDetails" style="display: none;">
-        <h2 id="projectName"></h2>
-        <p id="projectDescription"></p>
-        <p id="projectStatus"></p>
-        <button onclick="backToList()">Back to List</button>
-    </div>
-
-    <!-- Link to app.js (placed after Firebase SDKs) -->
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    
+    <!-- Link to JavaScript file -->
     <script src="app.js"></script>
 </body>
 </html>
