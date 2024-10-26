@@ -16,9 +16,9 @@ public extension DataConnect {
   static var defaultConnector: DefaultConnector = {
     let dc = DataConnect.dataConnect(connectorConfig: DefaultConnector.connectorConfig, callerSDKType: .generated)
     return DefaultConnector(dataConnect: dc)
-  ***REMOVED***()
+  }()
 
-***REMOVED***
+}
 
 public class DefaultConnector {
 
@@ -31,13 +31,13 @@ public class DefaultConnector {
 
     // init operations 
     
-  ***REMOVED***
+  }
 
   public func useEmulator(host: String = DataConnect.EmulatorDefaults.host, port: Int = DataConnect.EmulatorDefaults.port) {
     self.dataConnect.useEmulator(host: host, port: port)
-  ***REMOVED***
+  }
 
   // MARK: Operations
 
 
-***REMOVED***
+}

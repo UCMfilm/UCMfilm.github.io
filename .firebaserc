@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "ucmfilm-c6bfe"
-  ***REMOVED***,
-  "targets": {***REMOVED***,
-  "etags": {***REMOVED***
-***REMOVED***
+  },
+  "targets": {},
+  "etags": {}
+}

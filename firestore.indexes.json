@@ -6,21 +6,21 @@
   //     "collectionGroup": "widgets",
   //     "queryScope": "COLLECTION",
   //     "fields": [
-  //       { "fieldPath": "foo", "arrayConfig": "CONTAINS" ***REMOVED***,
-  //       { "fieldPath": "bar", "mode": "DESCENDING" ***REMOVED***
+  //       { "fieldPath": "foo", "arrayConfig": "CONTAINS" },
+  //       { "fieldPath": "bar", "mode": "DESCENDING" }
   //     ]
-  //   ***REMOVED***,
+  //   },
   //
   //  "fieldOverrides": [
   //    {
   //      "collectionGroup": "widgets",
   //      "fieldPath": "baz",
   //      "indexes": [
-  //        { "order": "ASCENDING", "queryScope": "COLLECTION" ***REMOVED***
+  //        { "order": "ASCENDING", "queryScope": "COLLECTION" }
   //      ]
-  //    ***REMOVED***,
+  //    },
   //   ]
   // ]
   "indexes": [],
   "fieldOverrides": []
-***REMOVED***
+}

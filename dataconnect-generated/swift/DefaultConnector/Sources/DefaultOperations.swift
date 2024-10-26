@@ -27,7 +27,7 @@ import FirebaseDataConnect
 public enum OrderDirection: String, Codable {
   case ASC = "ASC"
   case DESC = "DESC"
-  ***REMOVED***
+  }
 
 // End enum definitions
 

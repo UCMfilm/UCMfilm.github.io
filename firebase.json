@@ -1,7 +1,7 @@
 {
   "dataconnect": {
     "source": "dataconnect"
-  ***REMOVED***,
+  },
   "functions": [
     {
       "source": "functions",
@@ -13,6 +13,6 @@
         "firebase-debug.*.log",
         "*.local"
       ]
-    ***REMOVED***
+    }
   ]
-***REMOVED***
+}

@@ -8,18 +8,18 @@
 #     title
 #     imageUrl
 #     genre
-#   ***REMOVED***
-# ***REMOVED***
+#   }
+# }
 
 # # List all users, only admins should be able to list all users, so we use NO_ACCESS
 # query ListUsers @auth(level: NO_ACCESS) {
-#   users { id, username ***REMOVED***
-# ***REMOVED***
+#   users { id, username }
+# }
 
 # # Logged in user can list all their reviews and movie titles associated with the review 
 # # Since the query requires the uid of the current authenticated user, the auth level is set to USER
 # query ListUserReviews @auth(level: USER) {
-#   user(key: {id_expr: "auth.uid"***REMOVED***) {
+#   user(key: {id_expr: "auth.uid"}) {
 #     id
 #     username
 #     # <field>_on_<foreign_key_field> makes it easy to grab info from another table
@@ -32,10 +32,10 @@
 #       movie {
 #         id
 #         title
-#       ***REMOVED***
-#     ***REMOVED***
-#   ***REMOVED***
-# ***REMOVED***
+#       }
+#     }
+#   }
+# }
 
 # # Get movie by id
 # query GetMovieById($id: UUID!) @auth(level: PUBLIC) {
@@ -48,7 +48,7 @@
 #       rating
 #       releaseYear
 #       description
-#     ***REMOVED***
+#     }
 #     reviews: reviews_on_movie {
 #       id
 #       reviewText
@@ -57,10 +57,10 @@
 #       user {
 #         id
 #         username
-#       ***REMOVED***
-#     ***REMOVED***
-#   ***REMOVED***
-# ***REMOVED***
+#       }
+#     }
+#   }
+# }
 
 # # Search for movies, actors, and reviews
 # query SearchMovie(
@@ -70,14 +70,14 @@
 #   movies(
 #     where: {
 #       _and: [
-#         { genre: { eq: $genre ***REMOVED*** ***REMOVED***
-#         { title: { contains: $titleInput ***REMOVED*** ***REMOVED***
+#         { genre: { eq: $genre } }
+#         { title: { contains: $titleInput } }
 #       ]
-#     ***REMOVED***
+#     }
 #   ) {
 #     id
 #     title
 #     genre
 #     imageUrl
-#   ***REMOVED***
-# ***REMOVED***
+#   }
+# }

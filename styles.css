@@ -5,38 +5,38 @@ body {
     margin: 0;
     padding: 0;
     background-color: #d8c2c4; /* Grey-pink background */
-***REMOVED***
+}
 
 nav {
     background-color: #4a3a40; /* Complementary color to grey-pink */
     padding: 10px;
-***REMOVED***
+}
 
 nav ul {
     list-style: none;
     padding: 0;
-***REMOVED***
+}
 
 nav ul li {
     display: inline;
     margin-right: 15px;
-***REMOVED***
+}
 
 nav ul li a {
     color: #fff; /* White text */
     text-decoration: none;
     font-weight: bold; /* Very bold text */
-***REMOVED***
+}
 
 nav ul li a:hover {
     color: #e0d0d5; /* Lightened color on hover */
-***REMOVED***
+}
 
 .welcome-section {
     padding: 50px;
     background: none; /* Removing blue background stripe */
     color: #3c2f2f; /* Very dark brown for welcome text */
-***REMOVED***
+}
 
 button {
     padding: 10px 20px;
@@ -45,4 +45,4 @@ button {
     border: none;
     cursor: pointer;
     margin: 10px;
-***REMOVED***
+}
