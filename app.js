@@ -31,6 +31,7 @@ function showProjectData(projectName) {
     });
 }
 
+
 // Function to return to the project list view
 function backToList() {
     document.getElementById("projectDetails").style.display = "none";
