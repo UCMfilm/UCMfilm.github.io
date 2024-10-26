@@ -1,57 +1,43 @@
-// Google API Client ID and API Key (DO NOT PUSH TO PUBLIC REPOS)
-const CLIENT_ID = '71365436814-tj6nv6feqpa75h6rgckee3lkc1kce458.apps.googleusercontent.com'; // Replace with your Client ID
-const API_KEY = 'AIzaSyCPOFaeFyHXmq6NnLMJffDxUvZWIrnRsPw'; // Replace with your API Key
+const CLIENT_ID = '71365436814-tj6nv6feqpa75h6rgckee3lkc1kce458.apps.googleusercontent.com';
+const API_KEY = 'AIzaSyCPOFaeFyHXmq6NnLMJffDxUvZWIrnRsPw';
+const SPREADSHEET_ID = '1noQqSTlx4woOY7tB1c0sQctA3SAZXX6cfDVJLq0VKak';
+const RANGE = 'Google Contacts!A1:F';
 
-// Google Sheets ID and range to read from
-const SPREADSHEET_ID = '1noQqSTlx4woOY7tB1c0sQctA3SAZXX6cfDVJLq0VKak'; // Replace with your Spreadsheet ID
-const RANGE = 'Google Contacts!A1:E'; // Adjust range as needed
+let tokenClient;
+let accessToken = null;
 
-// Authorization scopes
-const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
-
-// Load the auth2 library and API client library
 function loadClient() {
-    gapi.load('client:auth2', initClient);
+    gapi.load('client', initClient);
 }
 
-// Initialize the client with API key and Client ID
 function initClient() {
     gapi.client.init({
         apiKey: API_KEY,
-        clientId: CLIENT_ID,
         discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-        scope: SCOPES
     }).then(() => {
-        // Listen for sign-in state changes
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-        // Handle the initial sign-in state
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        console.log("Google API client initialized.");
     }).catch(error => console.error("Error initializing client:", error));
+
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+        callback: (tokenResponse) => {
+            accessToken = tokenResponse.access_token;
+            fetchData();
+        },
+    });
 }
 
-// Handle login status and load data if signed in
-function updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        fetchData();
-    } else {
-        console.log("User not signed in");
-        document.getElementById('signin-button').style.display = 'block';
-    }
-}
-
-// Sign in the user
 function handleAuthClick() {
-    gapi.auth2.getAuthInstance().signIn();
+    tokenClient.requestAccessToken();
 }
 
-// Sign out the user
-function handleSignoutClick() {
-    gapi.auth2.getAuthInstance().signOut();
-}
-
-// Fetch data from Google Sheets API
 function fetchData() {
+    if (!accessToken) {
+        console.error("Access token is not available.");
+        return;
+    }
+
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: SPREADSHEET_ID,
         range: RANGE,
@@ -61,12 +47,11 @@ function fetchData() {
     }).catch(error => console.error("Error fetching data:", error));
 }
 
-// Display data in HTML
 function displayData(data) {
     const contactDataDiv = document.getElementById('contactData');
-    contactDataDiv.innerHTML = ''; // Clear previous data
+    contactDataDiv.innerHTML = '';
 
-    data.forEach((row, index) => {
+    data.forEach(row => {
         const contactDiv = document.createElement("div");
         contactDiv.innerHTML = `
             <h3>${row[0]} ${row[1] || ""}</h3>
@@ -78,5 +63,4 @@ function displayData(data) {
     });
 }
 
-// Load client when page is ready
 document.addEventListener('DOMContentLoaded', loadClient);
