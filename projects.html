@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets Contacts via login</title>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="app.js"></script>
+    <title>Google Sheets Contacts</title>
+    <!-- Load Google API client -->
+    <script src="https://apis.google.com/js/api.js" defer></script>
+    <!-- Load Google Identity Services (GIS) client library -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Load app.js after libraries -->
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <h1>Google Sheets Contacts</h1>
+    <h1>Google Sheets Contacts login</h1>
     <button id="signin-button" onclick="handleAuthClick()">Sign In</button>
     <div id="contactData"></div>
 </body>
