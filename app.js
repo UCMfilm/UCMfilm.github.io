@@ -1,56 +1,30 @@
-function fetchData() {
-    console.log("Starting data fetch...");
+// Listen for messages from the iframe (Google Apps Script)
+window.addEventListener("message", (event) => {
+    if (event.origin !== "https://script.google.com") {
+        console.error("Origin mismatch. Expected 'https://script.google.com', but received:", event.origin);
+        return;
+    }
 
-    const url = 'https://script.google.com/macros/s/AKfycbyCsKkwHje-1JowDoAmcupz4KaDilXv_3W411YBnp3ZoazGFD3GG7c8DpxB81oKKPi4/exec';
+    console.log("Data received from Apps Script:", event.data);
+    displayData(event.data);
+});
 
-    fetch(url)
-        .then(response => {
-            console.log("Received response:", response);
+// Function to display fetched data in HTML
+function displayData(data) {
+    const contactDataDiv = document.getElementById("contactData");
+    contactDataDiv.innerHTML = ''; // Clear previous data
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+    data.forEach((contact, index) => {
+        const contactDiv = document.createElement("div");
+        contactDiv.innerHTML = `
+            <h3>${contact["First name"]} ${contact["Last name"] || ""}</h3>
+            <p>Email: ${contact.Email}</p>
+            <p>Job Title: ${contact["Job title"] || "N/A"}</p>
+            <p>Phone: ${contact.Phone || "N/A"}</p>
+            <p>Labels/Groups: ${contact["Labels/Groups"] || "N/A"}</p>
+        `;
+        contactDataDiv.appendChild(contactDiv);
+    });
 
-            return response.json();
-        })
-        .then(data => {
-            console.log("Fetched data:", data);
-
-            const contactDataDiv = document.getElementById('contactData');
-            if (!contactDataDiv) {
-                console.error("Element with id 'contactData' not found.");
-                return;
-            }
-
-            contactDataDiv.innerHTML = ''; // Clear previous data
-
-            if (!Array.isArray(data) || data.length === 0) {
-                console.warn("No data available or data is not in array format:", data);
-                contactDataDiv.innerHTML = "<p>No contacts found.</p>";
-                return;
-            }
-
-            data.forEach((contact, index) => {
-                console.log(`Processing contact ${index + 1}:`, contact);
-
-                if (!contact["First name"] || !contact.Email) {
-                    console.warn(`Incomplete contact data at index ${index}:`, contact);
-                    return;
-                }
-
-                const contactElement = document.createElement('p');
-                contactElement.textContent = `${contact["First name"]} ${contact["Last name"] || ""}: ${contact.Email}`;
-                contactDataDiv.appendChild(contactElement);
-            });
-
-            console.log("Data displayed successfully.");
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-
-            const contactDataDiv = document.getElementById('contactData');
-            if (contactDataDiv) {
-                contactDataDiv.innerHTML = "<p>Error loading contacts. Please try again later.</p>";
-            }
-        });
+    console.log("Data displayed successfully.");
 }
