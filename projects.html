@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project List</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs (using non-ESM CDN links for compatibility) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 </head>
@@ -25,14 +25,14 @@
     </div>
 
     <!-- Project Details Section -->
-    <div id="projectDetails" >
+    <div id="projectDetails" style="display: none;">
         <h2 id="projectName"></h2>
         <p id="projectDescription"></p>
         <p id="projectStatus"></p>
         <button onclick="backToList()">Back to List</button>
     </div>
 
-    <!-- Link to app.js -->
+    <!-- Link to app.js (placed after Firebase SDKs) -->
     <script src="app.js"></script>
 </body>
 </html>

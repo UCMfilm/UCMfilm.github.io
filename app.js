@@ -1,4 +1,4 @@
-// Firebase initialization (ensure Firebase SDK script is included in the HTML)
+// Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
     authDomain: "ucmfilm-c6bfe.firebaseapp.com",
@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 // Initialize Firebase and Firestore
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore(); // Ensure this is defined at the start
+const db = firebase.firestore();
 
 // Google Sign-In setup
 document.getElementById("googleLoginButton").addEventListener("click", function() {
