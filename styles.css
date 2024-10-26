@@ -1,12 +1,14 @@
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
+    background-color: #d8c2c4; /* Grey-pink background */
 ***REMOVED***
 
 nav {
-    background-color: #333;
+    background-color: #4a3a40; /* Complementary color to grey-pink */
     padding: 10px;
 ***REMOVED***
 
@@ -21,19 +23,24 @@ nav ul li {
 ***REMOVED***
 
 nav ul li a {
-    color: white;
+    color: #fff; /* White text */
     text-decoration: none;
+    font-weight: bold; /* Very bold text */
+***REMOVED***
+
+nav ul li a:hover {
+    color: #e0d0d5; /* Lightened color on hover */
 ***REMOVED***
 
 .welcome-section {
     padding: 50px;
-    background: #4285f4;
-    color: white;
+    background: none; /* Removing blue background stripe */
+    color: #3c2f2f; /* Very dark brown for welcome text */
 ***REMOVED***
 
 button {
     padding: 10px 20px;
-    background-color: #4285f4;
+    background-color: #4a3a40; /* Match complementary menu color */
     color: white;
     border: none;
     cursor: pointer;
