@@ -1,48 +1,39 @@
-// Import required packages
-require('dotenv').config();  // Load environment variables from .env file
-const azure = require('azure-storage');  // Import Azure Storage SDK
+// Google Sheets API URL
+const apiUrl = "https://script.google.com/a/macros/ucm-film.com/s/AKfycbx6-_9YcsukySAltqfOGWkpv1BHUPvW3e-EBh8BSVbkaFnX0W24SO1RQ6nMt7jopho/exec";
 
-// Retrieve the connection string from the environment variables
-const connectionString = process.env.CONNECTION_STRING;
-const tableService = azure.createTableService(connectionString);
+// Function to display a specific contact's data by name
+async function showContactData(firstName) {
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
-// Specify the name of the Azure Table
-const tableName = 'projects';
+        // Find the contact in the fetched data by first name
+        const contact = data.find(item => item["First name"] === firstName);
 
-// Function to display a specific project's data by name
-function showProjectData(projectName) {
-    // Query Azure Table Storage for a specific project based on PartitionKey
-    const query = new azure.TableQuery().where('PartitionKey eq ?', projectName);
-
-    tableService.queryEntities(tableName, query, null, (error, result) => {
-        if (error) {
-            console.error("Error fetching project data:", error);
-            document.getElementById("output").innerText = "Error fetching data.";
-        } else if (result.entries.length > 0) {
-            const project = result.entries[0]; // Assuming project name (PartitionKey) is unique
-            document.getElementById("projectName").textContent = project.PartitionKey._;
-            document.getElementById("projectDescription").textContent = project.description._;
-            document.getElementById("projectStatus").textContent = `Status: ${project.status._}`;
-            document.getElementById("projectDetails").style.display = "block";
-            document.getElementById("projectList").style.display = "none";
+        if (contact) {
+            document.getElementById("contactName").textContent = `${contact["First name"]} ${contact["Last name"]}`;
+            document.getElementById("contactJobTitle").textContent = `Job Title: ${contact["Job title"]}`;
+            document.getElementById("contactEmail").textContent = `Email: ${contact.Email}`;
+            document.getElementById("contactPhone").textContent = `Phone: ${contact.Phone}`;
+            document.getElementById("contactLabels").textContent = `Labels/Groups: ${contact["Labels/Groups"]}`;
+            document.getElementById("contactDetails").style.display = "block";
+            document.getElementById("contactList").style.display = "none";
         } else {
-            console.log("Project not found.");
+            console.log("Contact not found.");
         }
-    });
-}
-
-
-// Function to return to the project list view
-function backToList() {
-    document.getElementById("projectDetails").style.display = "none";
-    document.getElementById("projectList").style.display = "block";
-}
-
-// Debugging: Test the connection by listing all projects in the table
-tableService.queryEntities(tableName, new azure.TableQuery(), null, (error, result) => {
-    if (error) {
-        console.error("Connection to Azure Table Storage failed:", error);
-    } else {
-        console.log("Successfully connected to Azure Table Storage. Project entries:", result.entries);
+    } catch (error) {
+        console.error("Error fetching data:", error);
     }
-});
+}
+
+// Function to return to the contact list view
+function backToList() {
+    document.getElementById("contactDetails").style.display = "none";
+    document.getElementById("contactList").style.display = "block";
+}
+
+// Initial data fetch for debugging
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => console.log("Successfully connected to Google Sheets. Contact entries:", data))
+    .catch(error => console.error("Connection to Google Sheets failed:", error));

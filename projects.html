@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azure Table Storage Project List</title>
+    <title>Contact List</title>
 </head>
 <body>
-    <h1>Projects from Azure Table Storage</h1>
+    <h1>Contacts from Google Sheets</h1>
 
-    <!-- Project List Buttons -->
-    <div id="projectList">
-        <button onclick="showProjectData('ProjectA')">Project A</button>
-        <button onclick="showProjectData('ProjectB')">Project B</button>
+    <!-- Contact List Buttons -->
+    <div id="contactList">
+        <button onclick="showContactData('ContactA')">Contact A</button>
+        <button onclick="showContactData('ContactB')">Contact B</button>
     </div>
 
-    <!-- Project Details Section -->
-    <div id="projectDetails" style="display: none;">
-        <h2 id="projectName"></h2>
-        <p id="projectDescription"></p>
-        <p id="projectStatus"></p>
+    <!-- Contact Details Section -->
+    <div id="contactDetails" style="display: none;">
+        <h2 id="contactName"></h2>
+        <p id="contactJobTitle"></p>
+        <p id="contactEmail"></p>
+        <p id="contactPhone"></p>
+        <p id="contactLabels"></p>
         <button onclick="backToList()">Back to List</button>
     </div>
 
-    <!-- Azure SDK and app.js Link -->
-    <script src="https://cdn.jsdelivr.net/npm/azure-storage"></script>
+    <!-- JavaScript Link -->
     <script src="app.js"></script>
 </body>
 </html>
