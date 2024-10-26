@@ -6,10 +6,10 @@
     <title>Contact List</title>
 </head>
 <body>
-    <h1>Contacts from Google Sheets</h1>
+    <h1>Contacts Google Sheets</h1>
 
     <!-- Button to Load Data -->
-    <button onclick="fetchData()">Load Contacts</button>
+    <button id="loadDataButton">Load Contacts</button>
 
     <!-- Section to Display Data -->
     <div id="contactData">
@@ -18,5 +18,11 @@
 
     <!-- Link to JavaScript File -->
     <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const button = document.getElementById('loadDataButton');
+            button.addEventListener('click', fetchData);
+        });
+    </script>
 </body>
 </html>
