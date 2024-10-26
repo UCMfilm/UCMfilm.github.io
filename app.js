@@ -1,3 +1,7 @@
+// Make the function accessible globally
+window.handleAuthClick = handleAuthClick;
+
+// Rest of the code
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const API_KEY = import.meta.env.VITE_API_KEY;
 const SPREADSHEET_ID = import.meta.env.VITE_SPREADSHEET_ID;
@@ -6,7 +10,6 @@ const RANGE = import.meta.env.VITE_RANGE;
 let tokenClient;
 let accessToken = null;
 
-// Load and initialize Google API client and GIS
 function loadClient() {
     gapi.load('client', () => {
         gapi.client.init({
@@ -19,7 +22,6 @@ function loadClient() {
     });
 }
 
-// Initialize Google Identity Services for authentication
 function initializeTokenClient() {
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
@@ -31,7 +33,6 @@ function initializeTokenClient() {
     });
 }
 
-// Trigger GIS for sign-in
 function handleAuthClick() {
     if (tokenClient) {
         tokenClient.requestAccessToken();
@@ -40,7 +41,6 @@ function handleAuthClick() {
     }
 }
 
-// Fetch data from Google Sheets API
 function fetchData() {
     if (!accessToken) {
         console.error("Access token is not available.");
@@ -56,7 +56,6 @@ function fetchData() {
     }).catch(error => console.error("Error fetching data:", error));
 }
 
-// Display data in HTML
 function displayData(data) {
     const contactDataDiv = document.getElementById('contactData');
     contactDataDiv.innerHTML = '';

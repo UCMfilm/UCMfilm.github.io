@@ -8,11 +8,11 @@
     <script src="https://apis.google.com/js/api.js" defer></script>
     <!-- Load Google Identity Services (GIS) client library -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- Load app.js after libraries -->
-    <script src="app.js" defer></script>
+    <!-- Load app.js as a module -->
+    <script src="app.js" type="module"></script>
 </head>
 <body>
-    <h1>Google Sheets Contacts login</h1>
+    <h1>Google Sheets Contacts 2</h1>
     <button id="signin-button" onclick="handleAuthClick()">Sign In</button>
     <div id="contactData"></div>
 </body>
