@@ -3,26 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact List</title>
+    <title>Google Sheets Contacts</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
     <h1>Google Sheets Contacts</h1>
-
-    <!-- Button to Load Data -->
-    <button id="loadDataButton">Load Contacts</button>
-
-    <!-- Section to Display Data -->
-    <div id="contactData">
-        <!-- Contact details will be displayed here -->
-    </div>
-
-    <!-- Link to JavaScript File -->
-    <script src="app.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const button = document.getElementById('loadDataButton');
-            button.addEventListener('click', fetchData);
-        });
-    </script>
+    <button id="signin-button" onclick="handleAuthClick()">Sign In</button>
+    <button onclick="handleSignoutClick()">Sign Out</button>
+    <div id="contactData"></div>
 </body>
 </html>
