@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firestore Connection Test</title>
+    <title>Azure Table Storage Project List</title>
 </head>
 <body>
-    <h1>Testing Firestore Connection</h1>
-    <div id="output">Loading...</div>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <h1>Projects from Azure Table Storage</h1>
+
+    <!-- Project List Buttons -->
+    <div id="projectList">
+        <button onclick="showProjectData('Project A')">Project A</button>
+        <button onclick="showProjectData('Project B')">Project B</button>
+    </div>
+
+    <!-- Project Details Section -->
+    <div id="projectDetails" style="display: none;">
+        <h2 id="projectName"></h2>
+        <p id="projectDescription"></p>
+        <p id="projectStatus"></p>
+        <button onclick="backToList()">Back to List</button>
+    </div>
+
+    <!-- Azure SDK and app.js Link -->
+    <script src="https://cdn.jsdelivr.net/npm/azure-storage"></script>
     <script src="app.js"></script>
 </body>
 </html>

@@ -1,28 +1,48 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
-    authDomain: "ucmfilm-c6bfe.firebaseapp.com",
-    projectId: "ucmfilm-c6bfe",
-    storageBucket: "ucmfilm-c6bfe.appspot.com",
-    messagingSenderId: "71365436814",
-    appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df"
-***REMOVED***;
+// Import Azure Storage SDK
+const azure = require('azure-storage');
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Azure Table Storage connection string
+const connectionString = "DefaultEndpointsProtocol=https;AccountName=ucmfilm;AccountKey=***REMOVED***;TableEndpoint=https://ucmfilm.table.cosmos.azure.com:443/;";
 
-// Test Firestore connection
-db.collection("projects").get()
-    .then((snapshot) => {
-        let output = "Connected Successfully. Projects:<br>";
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            output += `Name: ${data.name***REMOVED***, Status: ${data.status***REMOVED***, Description: ${data.description***REMOVED***<br>`;
-***REMOVED***);
-        document.getElementById("output").innerHTML = output;
-    ***REMOVED***)
-    .catch((error) => {
-        console.error("Error fetching data:", error);
-        document.getElementById("output").innerText = "Connection failed.";
+// Initialize Table Service
 ***REMOVED***
+
+// Specify table name
+***REMOVED***
+
+// Function to display a specific project's data
+***REMOVED***
+    // Query the Azure Table Storage to find the project by PartitionKey (projectName)
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+            const project = result.entries[0]; // Assuming each project name is unique
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+// Debugging: Test the connection and list all projects in the table
+***REMOVED***
+***REMOVED***
+***REMOVED***
+    ***REMOVED*** else {
+***REMOVED***
+    ***REMOVED***
+***REMOVED***);
