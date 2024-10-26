@@ -6,25 +6,17 @@
     <title>Contact List</title>
 </head>
 <body>
-    <h1>Contacts from Google Sheetss</h1>
+    <h1>Contacts from Google Sheets</h1>
 
-    <!-- Contact List Buttons -->
-    <div id="contactList">
-        <button onclick="showContactData('ContactA')">Contact A</button>
-        <button onclick="showContactData('ContactB')">Contact B</button>
+    <!-- Button to Load Data -->
+    <button onclick="fetchData()">Load Contacts</button>
+
+    <!-- Section to Display Data -->
+    <div id="contactData">
+        <!-- Contact details will be displayed here -->
     </div>
 
-    <!-- Contact Details Section -->
-    <div id="contactDetails" style="display: none;">
-        <h2 id="contactName"></h2>
-        <p id="contactJobTitle"></p>
-        <p id="contactEmail"></p>
-        <p id="contactPhone"></p>
-        <p id="contactLabels"></p>
-        <button onclick="backToList()">Back to List</button>
-    </div>
-
-    <!-- JavaScript Link -->
+    <!-- Link to JavaScript File -->
     <script src="app.js"></script>
 </body>
 </html>
