@@ -3,39 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload to Google Drive and OneDrive</title>
+    <title>Your Web App</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Identity Services -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- Microsoft Authentication Library (MSAL.js) -->
-    <script src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
 </head>
 <body>
     <!-- Navigation Menu -->
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="page1.html">Google Drive Files</a></li>
-      <li><a href="page2.html">Other Page</a></li>
-    </ul>
-  </nav>
-    <div class="container">
-        <!-- For Google Drive -->
-<button id="google_authorize_button">Authorize Google Drive</button>
-<button id="google_signout_button">Sign Out Google</button>
-<input type="file" id="google_file_input" />
-<button id="google_upload_button" disabled>Upload to Google Drive</button>
-<button id="list_files_button">List Google Drive Files</button>
-<div id="file_list"></div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="#" id="loginButton">Login with Google/Microsoft</a></li>
+        </ul>
+    </nav>
 
-<!-- For Microsoft OneDrive -->
-<button id="microsoft_login_button">Login with Microsoft</button>
-<button id="microsoft_logout_button">Logout from Microsoft</button>
-<input type="file" id="microsoft_file_input" />
-<button id="microsoft_upload_button" disabled>Upload to OneDrive</button>
-<button id="list_files_button_microsoft">List OneDrive Files</button>
-<div id="file_list_microsoft"></div>
-</div>
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h1>Welcome to Your Web App</h1>
+        <p>Streamline your projects and tasks all in one place.</p>
+    </div>
+
+    <!-- Profile Section (hidden by default) -->
+    <div id="profileSection" style="display: none;">
+        <p id="profileInfo">Logged in as: <span id="userName"></span></p>
+    </div>
 
     <script src="app.js"></script>
 </body>

@@ -1,57 +1,41 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: rgba(255, 182, 193, 0.244);
     text-align: center;
     margin: 0;
     padding: 0;
 ***REMOVED***
 
-.container {
+nav {
+    background-color: #333;
+    padding: 10px;
+***REMOVED***
+
+nav ul {
+    list-style: none;
+    padding: 0;
+***REMOVED***
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+***REMOVED***
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+***REMOVED***
+
+.welcome-section {
     padding: 50px;
+    background: #4285f4;
+    color: white;
 ***REMOVED***
 
 button {
     padding: 10px 20px;
-    margin: 10px;
-    border: none;
     background-color: #4285f4;
     color: white;
+    border: none;
     cursor: pointer;
+    margin: 10px;
 ***REMOVED***
-
-button:hover {
-    background-color: #357ae8;
-***REMOVED***
-
-input[type="file"] {
-    margin: 20px;
-    padding: 10px;
-***REMOVED***
-/* Basic styles for the navigation menu */
-nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-  ***REMOVED***
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  ***REMOVED***
-  
-  nav ul li {
-    display: inline;
-    margin-right: 15px;
-  ***REMOVED***
-  
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-  ***REMOVED***
-  
-  nav ul li a:hover {
-    text-decoration: underline;
-  ***REMOVED***
-  

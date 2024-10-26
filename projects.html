@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+        </ul>
+    </nav>
+
+    <!-- Project List Section -->
+    <div id="projectList">
+        <button onclick="showProject('Project A', 'Description for Project A')">Project A</button>
+        <button onclick="showProject('Project B', 'Description for Project B')">Project B</button>
+    </div>
+
+    <!-- Project Details Section -->
+    <div id="projectDetails" style="display: none;">
+        <h2 id="projectName"></h2>
+        <p id="projectDescription"></p>
+        <button onclick="backToList()">Back to List</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
