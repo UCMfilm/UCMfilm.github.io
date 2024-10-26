@@ -1,18 +1,18 @@
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCVdZgou7mGBXmfJ2N8QQ1lyNNGU4eKWLA",
+    authDomain: "ucmfilm-c6bfe.firebaseapp.com",
+    projectId: "ucmfilm-c6bfe",
+    storageBucket: "ucmfilm-c6bfe.appspot.com",
+    messagingSenderId: "71365436814",
+    appId: "1:71365436814:web:683d1ace7f1e12e8e0f0df"
 ***REMOVED***;
 
 // Initialize Firebase and Firestore
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Confirm Firebase and Firestore Initialization
+// Confirm Firebase and Firestore initialization
 console.log("Firebase initialized:", firebase.apps.length > 0);
 console.log("Firestore object:", db);
 
