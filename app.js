@@ -1,18 +1,12 @@
 async function fetchData() {
     const url = 'https://script.google.com/macros/s/AKfycbxlxQ_7KsgkhbBJqD5YOAYtuNlGfmDUsh-VnQCId0bz7Sds3DpAI-M_QsmMN_MXN1aB/exec';
     try {
-        const response = await fetch(url, { mode: 'no-cors' });
-        console.log(response); // Check response status
-
-        // If we weren't using no-cors mode, this is where we'd parse and display data
-        // Uncomment below if CORS is resolved:
-        // const data = await response.json();
-        // displayData(data);
-
+        const response = await fetch(url);  // No 'no-cors' mode here
+        const data = await response.json();  // Parse JSON if CORS is resolved
+        displayData(data);  // Display the data
     } catch (error) {
         console.error('Error fetching data:', error);
     }
-}
 
 // Function to Display Data in HTML (Optional)
 function displayData(data) {
