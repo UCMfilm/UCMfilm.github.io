@@ -1,5 +1,5 @@
 // Google Sheets API URL
-const apiUrl = "https://script.google.com/a/macros/ucm-film.com/s/AKfycbx6-_9YcsukySAltqfOGWkpv1BHUPvW3e-EBh8BSVbkaFnX0W24SO1RQ6nMt7jopho/exec";
+const apiUrl = "https://script.google.com/macros/s/AKfycbx6-_9YcsukySAltqfOGWkpv1BHUPvW3e-EBh8BSVbkaFnX0W24SO1RQ6nMt7jopho/exec";
 
 // Function to display a specific contact's data by name
 async function showContactData(firstName) {
