@@ -1,5 +1,6 @@
 const ContactsTable = ({ contacts = [], onAddContact }) => {
     console.log("ContactsTable received contacts:", contacts);
+
     const [searchTerm, setSearchTerm] = React.useState('');
     const [sortConfig, setSortConfig] = React.useState({ key: null, direction: 'asc' });
     const [showAddDialog, setShowAddDialog] = React.useState(false);
@@ -8,7 +9,17 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
     });
 
     const contactsData = Array.isArray(contacts) ? contacts : [];
-    const headers = contactsData.length > 0 ? contactsData[0] : ['First Name', 'Last Name', 'Email', 'Job Title', 'Phone'];
+    const headers = contactsData[0] || ['First Name', 'Last Name', 'Email', 'Job Title', 'Phone'];
+
+    contactsData.forEach((row, rowIndex) => {
+        const nonEmptyFields = row.filter(cell => cell);
+
+        if (nonEmptyFields.length === 0) {
+            console.warn(`Row ${rowIndex} is completely empty`, row);
+        } else if (row.length < headers.length - 1) {
+            console.warn(`Row ${rowIndex} has an unexpected structure`, row);
+        }
+    });
 
     const handleSort = (key) => {
         let direction = 'asc';
@@ -44,6 +55,8 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
     }, [contactsData, searchTerm, sortConfig]);
 
     const handleAddContact = () => {
+        console.log("Adding contact with data:", newContact);
+
         const newContactArray = [
             newContact.firstName,
             newContact.lastName,
@@ -51,6 +64,7 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
             newContact.jobTitle,
             newContact.phone
         ];
+
         onAddContact(newContactArray);
         setNewContact({
             firstName: '', lastName: '', email: '', jobTitle: '', phone: ''
@@ -59,12 +73,11 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
     };
 
     const mainTable = React.createElement('div', { className: "space-y-4 p-4" },
-        // Search and Add Contact row
-        React.createElement('div', { 
-            style: { 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
+        React.createElement('div', {
+            style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 marginBottom: '1rem',
                 gap: '1rem'
             }
@@ -93,17 +106,15 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
                 }
             }, "Add Contact")
         ),
-
-        // Table
-        React.createElement('div', { 
-            style: { 
+        React.createElement('div', {
+            style: {
                 overflowX: 'auto',
                 backgroundColor: 'white',
                 borderRadius: '8px',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            } 
+            }
         },
-            React.createElement('table', { 
+            React.createElement('table', {
                 style: {
                     width: '100%',
                     borderCollapse: 'separate',
@@ -130,7 +141,7 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
                 ),
                 React.createElement('tbody', {},
                     filteredAndSortedContacts.map((contact, rowIndex) =>
-                        React.createElement('tr', { 
+                        React.createElement('tr', {
                             key: `row-${rowIndex}`,
                             style: {
                                 backgroundColor: rowIndex % 2 === 0 ? 'white' : '#f9f9f9'
@@ -152,6 +163,7 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
         )
     );
 
+    // Glass-blurred background and centered card styling for the modal
     const modal = showAddDialog ? React.createElement('div', {
         style: {
             position: 'fixed',
@@ -159,7 +171,8 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backdropFilter: 'blur(10px)',  // Glass-blurred effect
+            backgroundColor: 'rgba(255, 255, 255, 0.6)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -170,16 +183,19 @@ const ContactsTable = ({ contacts = [], onAddContact }) => {
             style: {
                 backgroundColor: 'white',
                 padding: '2rem',
-                borderRadius: '8px',
+                borderRadius: '12px',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
                 width: '90%',
-                maxWidth: '500px'
+                maxWidth: '500px',
+                zIndex: 1001 // Make sure it's above the blurred background
             }
         },
             React.createElement('h2', { 
                 style: {
                     marginBottom: '1.5rem',
                     fontSize: '1.5rem',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    textAlign: 'center'
                 }
             }, "Add New Contact"),
             [

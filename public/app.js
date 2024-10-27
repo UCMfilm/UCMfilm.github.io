@@ -48,12 +48,11 @@ async function fetchData() {
     }
 
     try {
-        // Add console.log to see what data we're getting
         const response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: config.SPREADSHEET_ID,
             range: config.RANGE,
         });
-        console.log("Fetched data:", response.result.values); // Add this line
+        console.log("Fetched data:", response.result.values);
         displayData(response.result.values);
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,15 +63,14 @@ function displayData(data) {
     const container = document.getElementById('contactData');
     
     if (!data) {
-        console.log("No data received"); // Add this line
+        console.log("No data received");
         container.innerHTML = '<p>No data available</p>';
         return;
     }
 
-    // Add console.log to see the data structure
-    console.log("Displaying data:", data); // Add this line
-    
-    container.innerHTML = '';
+    console.log("Displaying data:", data);
+
+    container.innerHTML = ''; // Clear previous content
     const root = document.createElement('div');
     container.appendChild(root);
 
@@ -81,8 +79,8 @@ function displayData(data) {
             const ContactsTable = module.default;
             ReactDOM.render(
                 React.createElement(ContactsTable, {
-                    contacts: data, // Make sure data is being passed correctly
-                    onAddContact: addContact
+                    contacts: data,
+                    onAddContact: addContact  // Ensure this is correctly assigned
                 }),
                 root
             );
@@ -94,6 +92,8 @@ function displayData(data) {
 }
 
 async function addContact(newContact) {
+    console.log("Attempting to add new contact:", newContact); // Log when adding contact
+
     try {
         const response = await gapi.client.sheets.spreadsheets.values.append({
             spreadsheetId: config.SPREADSHEET_ID,
@@ -104,13 +104,12 @@ async function addContact(newContact) {
             }
         });
         console.log('Contact added:', response);
-        fetchData();
+        fetchData(); // Refresh data to show the new contact
     } catch (error) {
         console.error('Error adding contact:', error);
         alert('Failed to add contact. Please try again.');
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const signInButton = document.getElementById('signInButton');
